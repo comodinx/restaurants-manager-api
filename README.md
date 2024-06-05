@@ -60,7 +60,7 @@ npm run db:install -- --help
 ```
 
 > Valores por defecto
->  - DB Name -> `laikapp_subscription`
+>  - DB Name -> `restaurants`
 >  - DB Host -> `localhost`
 >  - DB User -> `root`
 >  - DB User -> `WwFFTRDJ7s2RgPWx`
