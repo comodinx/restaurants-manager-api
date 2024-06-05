@@ -5,9 +5,10 @@ import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import { NestFactory } from "@nestjs/core";
 import { ValidationPipe, INestApplication } from "@nestjs/common";
-import { ExceptionsFilter } from "./filters";
+import { ExceptionsFilter } from "./server";
 import { AppModule } from "./app.module";
 import { logger } from "./helpers/logger";
+import { port } from "./constants/server";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require(`${process.cwd()}/package.json`);
@@ -58,8 +59,6 @@ export class App {
   }
 
   async listen(app: INestApplication) {
-    const port = +(process.env.SERVER_PORT || process.env.PORT || 8000);
-
     await app.listen(port);
     return app;
   }

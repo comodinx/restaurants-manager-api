@@ -1,7 +1,7 @@
 import { Injectable, NestMiddleware } from "@nestjs/common";
 import { Request, Response, NextFunction } from "express";
+import { healthPath } from "@app/constants/server";
 import { logger } from "@app/helpers/logger";
-import { trues } from "@app/constants";
 
 //
 // class
@@ -30,7 +30,7 @@ export class LoggerMiddleware implements NestMiddleware {
       const contentLength = this.headersSent(res) && realContentLength ? ` - ${realContentLength}` : "";
 
       // Check if is necesary manual exclude health check log http access
-      if (req.path === "/health") {
+      if (req.path === healthPath) {
         return;
       }
 

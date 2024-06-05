@@ -8,7 +8,6 @@
     "alwaysStrict": true,
     "strictNullChecks": true,
     "noUncheckedIndexedAccess": true,
-
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
@@ -17,7 +16,6 @@
     "allowUnreachableCode": false,
     "noFallthroughCasesInSwitch": true,
     "strictPropertyInitialization": false,
-
     "target": "es2021",
     "outDir": "./dist",
     "baseUrl": "./src",
@@ -26,16 +24,13 @@
     "paths": {
       "@app/*": ["*"]
     },
-
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "allowJs": false,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-
     "isolatedModules": true,
     "incremental": false,
-
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
   },

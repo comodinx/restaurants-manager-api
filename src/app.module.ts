@@ -1,5 +1,5 @@
 import { Module, NestModule, MiddlewareConsumer } from "@nestjs/common";
-import { LoggerMiddleware } from "./middlewares";
+import { LoggerMiddleware } from "./server";
 import { DatabaseModule } from "./database";
 import { HealthModule } from "./modules";
 

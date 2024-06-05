@@ -1,6 +1,6 @@
 <div id="top"></div>
 
-# API para administración de restaurantes
+# API Restaurantes
 
 Esta API se encarga de manejar todo lo necesario para las reservas de las mesas en los diferentes restaurantes que maneja el sistema.
 
