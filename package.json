@@ -1,8 +1,8 @@
 {
-  "name": "res-manager-api",
+  "name": "restaurants-manager-api",
   "version": "1.0.0",
-  "description": "API for restaurants management, based on NodeJs + Express",
-  "main": "index.js",
+  "description": "API for restaurants management, based on NodeJs + NestJs",
+  "main": "dist/main.js",
   "author": "Nicolas Molina",
   "license": "ISC",
   "scripts": {
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/comodinx/res-manager-api"
+    "url": "https://github.com/comodinx/restaurants-manager-api"
   },
   "dependencies": {
     "@comodinx/query-filters": "^0.0.3",
