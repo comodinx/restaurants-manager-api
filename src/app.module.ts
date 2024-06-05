@@ -1,11 +1,15 @@
 import { Module, NestModule, MiddlewareConsumer } from "@nestjs/common";
 import { LoggerMiddleware } from "./middlewares";
+import { DatabaseModule } from "./database";
 import { HealthModule } from "./modules";
 
 @Module({
   exports: [],
   controllers: [],
   imports: [
+    // Database
+    DatabaseModule,
+
     // Controllers
     HealthModule,
   ],

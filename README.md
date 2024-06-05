@@ -2,7 +2,7 @@
 
 # API para administración de restaurantes
 
-Esta API se encarga de manejar todo lo necesario para la administración de restaurantes y la reserva de las mesas en los mismos.
+Esta API se encarga de manejar todo lo necesario para las reservas de las mesas en los diferentes restaurantes que maneja el sistema.
 
 ## Index
 

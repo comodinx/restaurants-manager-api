@@ -1,0 +1,160 @@
+#!/usr/bin/env node
+
+try {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  require("dotenv").config();
+} catch (e) {
+  // ignore
+}
+
+//
+// imports
+//
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const fs = require("fs");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { exec } = require("child_process");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { name } = require(`${process.cwd()}/package.json`);
+
+//
+// constants
+//
+const help = process.argv.includes("--help");
+
+// Configure this line for each Micro Service
+const dbName = resolveArg("name", `laikapp_${name}`) || process.env.DB_NAME;
+const dbHost = resolveArg("host", "localhost") || process.env.DB_HOST;
+const dbUser = resolveArg("user", "root") || process.env.DB_USER;
+const dbPass = resolveArg("pass", "WwFFTRDJ7s2RgPWx") || process.env.DB_PASS;
+
+//
+// helpers
+//
+
+// loggers
+// eslint-disable-next-line no-console
+const titleLog = (title) => console.log(`\n============== ${title} ==============\n`);
+// eslint-disable-next-line no-console
+const byeLog = () => console.log("\n👋 Bye!\n");
+// eslint-disable-next-line no-console
+const successLog = (message) => console.log(`✅ ${message}`);
+// eslint-disable-next-line no-console
+const errorLog = (error) => console.error(`❌ ${error}`);
+
+/**
+ * used to resolve argument value
+ */
+function resolveArg(name, defaultValue, required = false) {
+  const argIndex = process.argv.indexOf(`--${name}`);
+
+  if (argIndex === -1 && required) {
+    errorLog(`El argumento [${name}] es obligatorio`);
+    process.exit(1);
+  }
+
+  return (argIndex > -1 && process.argv[argIndex + 1]) || defaultValue;
+}
+
+/**
+ * used to build path file
+ */
+function buildPathFile(filename) {
+  const path = `${process.cwd()}/database/${filename}`;
+
+  if (!fs.existsSync(path)) {
+    return;
+  }
+  return path;
+}
+
+/**
+ * used to execute mysql script
+ */
+async function execute(command, successMessage) {
+  return new Promise((resolve) => {
+    (async () => {
+      try {
+        const child = await exec(command);
+
+        child.stderr.on("data", (data) => {
+          if (data && data.includes("ERROR")) {
+            errorLog(`error: ${data}`);
+            process.exit(1);
+          }
+        });
+
+        child.on("close", () => {
+          successLog(successMessage);
+          resolve();
+        });
+      } catch (error) {
+        errorLog(`error: ${error && error.message}`);
+        process.exit(1);
+      }
+    })();
+  });
+}
+
+/**
+ * usage represents the help guide
+ */
+function usage() {
+  // eslint-disable-next-line no-console
+  console.log(`
+  Install database
+
+  usage:
+     node laika-db-install <options>
+
+  options:
+    - name {string} Database name
+    - host {string} Database host
+    - user {string} Database username
+    - pass {string} Database user password
+
+  environment vars:
+    - DB_NAME {string} Database name
+    - DB_HOST {string} Database host
+    - DB_USER {string} Database username
+    - DB_PASS {string} Database user password
+
+  example:
+     node laika-db-install --pass=secret
+  `);
+}
+
+/**
+ * used to execute mysql script
+ */
+async function run(filename, database, successMessage) {
+  const path = buildPathFile(filename);
+
+  if (path) {
+    await execute(
+      `mysql -h ${dbHost} -u ${dbUser} -p${dbPass} ${database} < ${path}`,
+      successMessage
+    );
+  }
+}
+
+//
+// main
+//
+
+(async () => {
+  if (help) return usage();
+
+  titleLog("Installing Database");
+
+  //
+  // script
+  //
+
+  await run("database.sql", "", /* success message */ "Database created");
+  await run("tables.sql", dbName, /* success message */ "Tables created");
+  await run("basedata.sql", dbName, /* success message */ "Base data inserted");
+  await run("dummies.sql", dbName, /* success message */ "Dummies created");
+
+  byeLog();
+})();
