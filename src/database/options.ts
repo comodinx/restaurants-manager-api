@@ -1,19 +1,19 @@
 import { Dialect } from "sequelize/types/sequelize";
 import { Injectable } from "@nestjs/common";
 import { SequelizeOptionsFactory, SequelizeModuleOptions } from "@nestjs/sequelize";
-import { trues } from "@app/constants";
+import constants from "@app/constants";
 
 /** Indicate if Database debug queries is enabled */
-const isDatabaseDebug = trues.includes(String(process.env.DB_DEBUG).toLowerCase());
+const isDatabaseDebug = constants.trues.includes(String(process.env.DB_DEBUG).toLowerCase());
 
 /** Indicate if autodiscover models */
-const isAutodiscover = trues.includes(String(process.env.DB_AUTODISCOVER).toLowerCase());
+const isAutodiscover = constants.trues.includes(String(process.env.DB_AUTODISCOVER).toLowerCase());
 
 /** Indicate if Database Pool is enabled */
-const isPoolEnabled = trues.includes(String(process.env.DB_POOL_ENABLED).toLowerCase());
+const isPoolEnabled = constants.trues.includes(String(process.env.DB_POOL_ENABLED).toLowerCase());
 
 /** Indicate if Database synchronization is enabled */
-const synchronize = trues.includes(String(process.env.DB_SYNCHRONIZE).toLowerCase());
+const synchronize = constants.trues.includes(String(process.env.DB_SYNCHRONIZE).toLowerCase());
 
 /**
  * Database default options
@@ -24,7 +24,7 @@ export class DatabaseOptions implements SequelizeOptionsFactory {
     const defaultHost = process.env.DB_HOST || "localhost";
     const defaultPort = +(process.env.DB_PORT || 3306);
     const defaultUser = process.env.DB_USER || "root";
-    const defaultName = process.env.DB_NAME || "laikapp";
+    const defaultName = process.env.DB_NAME || constants.app.name;
     const defaultPass = process.env.DB_PASS || "secret";
     const defaultTimezone = process.env.DB_TIMEZONE || "+00:00";
     const models = [];

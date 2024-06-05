@@ -2,9 +2,7 @@ import { isString } from "lodash";
 import { Injectable } from "@nestjs/common";
 import { HealthCheckService, SequelizeHealthIndicator } from "@nestjs/terminus";
 import { HealthDto } from "@app/dtos";
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const pkg = require(`${process.cwd()}/package.json`);
+import constants from "@app/constants";
 
 @Injectable()
 export class HealthService {
@@ -17,12 +15,12 @@ export class HealthService {
   // public
   //
 
-  async check(include: string = "") {
+  async check(include = "") {
     const res: HealthDto = {
       alive: true,
-      name: pkg.name,
-      version: pkg.version || "1.0.0",
-      environment: process.env.NODE_ENV || "development",
+      name: constants.app.name,
+      version: constants.app.version,
+      environment: constants.env,
     };
 
     try {

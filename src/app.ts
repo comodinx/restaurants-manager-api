@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-require("dotenv").config();
-
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import { NestFactory } from "@nestjs/core";
@@ -8,10 +5,7 @@ import { ValidationPipe, INestApplication } from "@nestjs/common";
 import { ExceptionsFilter } from "./server";
 import { AppModule } from "./app.module";
 import { logger } from "./helpers/logger";
-import { port } from "./constants/server";
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const pkg = require(`${process.cwd()}/package.json`);
+import constants from "./constants";
 
 export class App {
   async bootstrap() {
@@ -59,14 +53,14 @@ export class App {
   }
 
   async listen(app: INestApplication) {
-    await app.listen(port);
+    await app.listen(constants.server.port);
     return app;
   }
 
   async log(app: INestApplication) {
     const url = await app.getUrl();
 
-    logger.info(`Restaurant Manager API v${pkg.version}`);
+    logger.info(`Restaurant Manager API v${constants.app.version}`);
     logger.info(`Application is running on: ${url}`);
   }
 }

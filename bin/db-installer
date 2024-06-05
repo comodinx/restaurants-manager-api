@@ -23,7 +23,7 @@ const { name } = require(`${process.cwd()}/package.json`);
 const help = process.argv.includes("--help");
 
 // Configure this line for each Micro Service
-const dbName = resolveArg("name", `laikapp_${name}`) || process.env.DB_NAME;
+const dbName = resolveArg("name", name) || process.env.DB_NAME;
 const dbHost = resolveArg("host", "localhost") || process.env.DB_HOST;
 const dbUser = resolveArg("user", "root") || process.env.DB_USER;
 const dbPass = resolveArg("pass", "WwFFTRDJ7s2RgPWx") || process.env.DB_PASS;
@@ -105,7 +105,7 @@ function usage() {
   Install database
 
   usage:
-     node laika-db-install <options>
+     node db-installer <options>
 
   options:
     - name {string} Database name
@@ -120,7 +120,7 @@ function usage() {
     - DB_PASS {string} Database user password
 
   example:
-     node laika-db-install --pass=secret
+     node db-installer --pass=secret
   `);
 }
 

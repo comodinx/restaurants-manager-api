@@ -2,11 +2,11 @@ import { merge, isString, isNumber } from "lodash";
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus } from "@nestjs/common";
 import { BaseExceptionFilter } from "@nestjs/core";
 import { Request, Response } from "express";
-import { http } from "@app/constants";
 import { logger } from "@app/helpers/logger";
+import constants from "@app/constants";
 
 // constant for generic error
-const INTERNAL_SERVER_ERROR = 500;
+const INTERNAL_SERVER_ERROR = constants.http.codes.INTERNAL_SERVER_ERROR;
 
 // default error options
 const defaultOptions = {
@@ -16,10 +16,7 @@ const defaultOptions = {
 };
 
 // constant for httpCodes
-const httpValidCodes = Object.values(http.codes);
-
-// constant for verify environment
-const isProd = ["prod", "production"].includes(String(process.env.NODE_ENV).toLowerCase());
+const httpValidCodes = Object.values(constants.http.codes);
 
 /**
  * Exceptions handler
@@ -44,7 +41,7 @@ export class ExceptionsFilter extends BaseExceptionFilter implements ExceptionFi
     // Handle http error
     //
     if (error instanceof HttpException) {
-      logger.error(error, isProd ? "" : error.stack || "");
+      logger.error(error, constants.isProd ? "" : error.stack || "");
       exception = error;
 
       // Extra information on Http Exception
@@ -73,11 +70,14 @@ export class ExceptionsFilter extends BaseExceptionFilter implements ExceptionFi
       // Get the message
       const message = (error && error.message) || context.options.message;
       // Get the status code
-      const status = (error && (error.code || error.statusCode)) || context.options.code || INTERNAL_SERVER_ERROR;
+      const status =
+        (error && (error.code || error.statusCode)) ||
+        context.options.code ||
+        INTERNAL_SERVER_ERROR;
       // Get the extra information
       const extra = merge({}, (error && error.extra) || {}, context.options.extra || {});
 
-      logger.error(message, status, isProd ? "" : error.stack || "");
+      logger.error(message, status, constants.isProd ? "" : error.stack || "");
       exception = new HttpException({ message, extra }, status);
     }
 
@@ -103,7 +103,9 @@ export class ExceptionsFilter extends BaseExceptionFilter implements ExceptionFi
       error &&
       error.error &&
       (isString(error.error.error) || isString(error.error.message)) &&
-      (isNumber(error.error.code) || isNumber(error.error.status) || isNumber(error.error.statusCode))
+      (isNumber(error.error.code) ||
+        isNumber(error.error.status) ||
+        isNumber(error.error.statusCode))
     );
   }
 
@@ -118,7 +120,12 @@ export class ExceptionsFilter extends BaseExceptionFilter implements ExceptionFi
       ...options.extra,
     };
 
-    return this.transformError(realError, message, extra, /* debugable error */ error.stack ? error : realError);
+    return this.transformError(
+      realError,
+      message,
+      extra,
+      /* debugable error */ error.stack ? error : realError
+    );
   }
 
   /**
@@ -151,25 +158,30 @@ export class ExceptionsFilter extends BaseExceptionFilter implements ExceptionFi
   /**
    * Transform axios error on comodinx/error system
    */
-  private transformError(error: any, message: string | undefined | null, extra: any, debugableError: any) {
+  private transformError(
+    error: any,
+    message: string | undefined | null,
+    extra: any,
+    debugableError: any
+  ) {
     // Handle error by code
     if (error.code && httpValidCodes.includes(Number(error.code))) {
       // Log error if flag log is true
-      logger.error(debugableError, error.code, isProd ? "" : error.stack || "");
+      logger.error(debugableError, error.code, constants.isProd ? "" : error.stack || "");
       return new HttpException({ message, extra }, error.code);
     }
 
     // Handle error by status
     if (error.status && httpValidCodes.includes(Number(error.status))) {
       // Log error if flag log is true
-      logger.error(debugableError, error.status, isProd ? "" : error.stack || "");
+      logger.error(debugableError, error.status, constants.isProd ? "" : error.stack || "");
       return new HttpException({ message, extra }, error.status);
     }
 
     // Handle error by statusCode
     if (error.statusCode && httpValidCodes.includes(Number(error.statusCode))) {
       // Log error if flag log is true
-      logger.error(debugableError, error.statusCode, isProd ? "" : error.stack || "");
+      logger.error(debugableError, error.statusCode, constants.isProd ? "" : error.stack || "");
       return new HttpException({ message, extra }, error.statusCode);
     }
 
@@ -177,7 +189,7 @@ export class ExceptionsFilter extends BaseExceptionFilter implements ExceptionFi
     logger.error(
       debugableError,
       error.code || error.status || error.statusCode || INTERNAL_SERVER_ERROR,
-      isProd ? "" : error.stack || ""
+      constants.isProd ? "" : error.stack || ""
     );
     return new HttpException(
       { message, extra },

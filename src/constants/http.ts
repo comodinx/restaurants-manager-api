@@ -1,2 +1,5 @@
+/**
+ * HTTP utility constants
+ */
 // @ts-ignore
-export * as http from "http-constants";
+export * from "http-constants";
