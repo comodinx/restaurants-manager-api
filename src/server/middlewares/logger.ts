@@ -27,7 +27,8 @@ export class LoggerMiddleware implements NestMiddleware {
       const time = responseTime ? ` ${responseTime} ms` : "";
       const status = res.statusCode ? ` ${res.statusCode}` : "";
       const realContentLength = res.getHeader("content-length");
-      const contentLength = this.headersSent(res) && realContentLength ? ` - ${realContentLength}` : "";
+      const contentLength =
+        this.headersSent(res) && realContentLength ? ` - ${realContentLength}` : "";
 
       // Check if is necesary manual exclude health check log http access
       if (req.path === constants.server.healthPath) {

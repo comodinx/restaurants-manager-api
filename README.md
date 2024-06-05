@@ -90,12 +90,6 @@ npm run build && npm start
 
 <p align="right">(<a href="#top">ir arriba</a>)</p>
 
->
-> 💡 Se debe reemplazar con el valor que corresponda para `<ENTORNO>`.
->
-
-<p align="right">(<a href="#top">ir arriba</a>)</p>
-
 
 ## Tests
 
