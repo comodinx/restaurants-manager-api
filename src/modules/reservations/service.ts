@@ -6,6 +6,7 @@ import { CreateReservationStrategy } from "./strategies";
 @Injectable()
 export class ReservationsService {
   constructor(private readonly createReservationStrategy: CreateReservationStrategy) {}
+
   //
   // public
   //
@@ -13,24 +14,24 @@ export class ReservationsService {
   /**
    * Find all or filtered
    *
-   * @param query {FinderDto} Query options
+   * @param options {FinderDto} Query options
    *
    * @return {Promise<Reservation[]>} Result of find reservations
    */
-  async find(query: FinderDto): Promise<Reservation[]> {
-    return Reservation.findByQueryFilters(Reservation, query);
+  async find(options: FinderDto): Promise<Reservation[]> {
+    return Reservation.findByQueryFilters(Reservation, options);
   }
 
   /**
    * Get by ID
    *
    * @param id {number} Unique Reservation Identifier
-   * @param query {GetterByIdDto} Query options
+   * @param options {GetterByIdDto} Query options
    *
    * @return {Promise<Reservation | undefined | null>} Result of get reservation by ID
    */
-  async getById(id: number, query: GetterByIdDto = {}): Promise<Reservation | undefined | null> {
-    return Reservation.getByIdAndQueryFilters(Reservation, id, query);
+  async getById(id: number, options: GetterByIdDto = {}): Promise<Reservation | undefined | null> {
+    return Reservation.getByIdAndQueryFilters(Reservation, id, options);
   }
 
   /**

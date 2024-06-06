@@ -1,0 +1,42 @@
+export const restaurantTables = [
+  {
+    id: 1,
+    restaurantId: 1,
+    capacity: 2,
+    observations: "ala norte A. mesa cuadrada",
+    createdAt: "2024-06-05T18:32:44.000Z",
+    updatedAt: null,
+  },
+  {
+    id: 2,
+    restaurantId: 1,
+    capacity: 2,
+    observations: "ala norte B. mesa cuadrada",
+    createdAt: "2024-06-05T18:32:44.000Z",
+    updatedAt: null,
+  },
+  {
+    id: 3,
+    restaurantId: 1,
+    capacity: 4,
+    observations: "ala norte este A. mesa rectangular",
+    createdAt: "2024-06-05T18:32:44.000Z",
+    updatedAt: null,
+  },
+  {
+    id: 4,
+    restaurantId: 1,
+    capacity: 4,
+    observations: "ala norte este B. mesa rectangular",
+    createdAt: "2024-06-05T18:32:44.000Z",
+    updatedAt: null,
+  },
+  {
+    id: 5,
+    restaurantId: 1,
+    capacity: 6,
+    observations: "ala central. mesa redonda",
+    createdAt: "2024-06-05T18:32:44.000Z",
+    updatedAt: null,
+  },
+];

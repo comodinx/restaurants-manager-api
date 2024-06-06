@@ -1,4 +1,4 @@
-import { Op, literal } from "sequelize";
+import moment from "moment";
 import { HttpException, HttpStatus } from "@nestjs/common";
 import { Reservation, Customer, RestaurantTable } from "@app/entities";
 import { CreateReservationDto } from "@app/dtos";
@@ -45,8 +45,38 @@ export class CreateReservationStrategy {
    * @return {Promise<object>} Current context
    */
   private async validate(context: any) {
-    await this.validateTable(context);
     await this.validateDate(context);
+    await this.validateTable(context);
+    await this.validateReservation(context);
+    return context;
+  }
+
+  /**
+   * Validate reservation date
+   *
+   * @param context {object} Current context
+   *
+   * @return {Promise<object>} Current context
+   */
+  private async validateDate(context: any) {
+    const now = moment().startOf("day");
+    const reservationDate = moment(
+      context.reservationDate,
+      constants.dates.formatReservationDate
+    ).startOf("day");
+
+    if (reservationDate.isBefore(now)) {
+      throw new HttpException(
+        {
+          message: "La fecha de reserva no puede ser menor a la fecha de hoy",
+          statusCode: HttpStatus.BAD_REQUEST,
+          extra: {
+            code: "INVALID_RESERVATION_DATE",
+          },
+        },
+        HttpStatus.BAD_REQUEST
+      );
+    }
     return context;
   }
 
@@ -73,7 +103,7 @@ export class CreateReservationStrategy {
           message: "La mesa solicitada no existe",
           statusCode: HttpStatus.NOT_FOUND,
           extra: {
-            code: "NOT_FOUND",
+            code: "RESTAURANT_TABLE_NOT_FOUND",
             tableId: context.tableId,
             restaurantId: context.restaurantId,
           },
@@ -81,6 +111,7 @@ export class CreateReservationStrategy {
         HttpStatus.NOT_FOUND
       );
     }
+
     if (table.capacity < context.numGuests) {
       throw new HttpException(
         {
@@ -102,20 +133,18 @@ export class CreateReservationStrategy {
   }
 
   /**
-   * Validate reservation date
+   * Validate reservation collision
    *
    * @param context {object} Current context
    *
    * @return {Promise<object>} Current context
    */
-  private async validateDate(context: any) {
+  private async validateReservation(context: any) {
     const opts: any = {
       attributes: ["id", "customerId", "statusId"],
       where: {
         tableId: context.tableId,
-        reservationDate: {
-          [Op.eq]: literal(`'${context.reservationDate}'`),
-        },
+        reservationDate: context.reservationDate,
       },
     };
 
@@ -129,7 +158,7 @@ export class CreateReservationStrategy {
           message: "Ya existe una reserva para la fecha seleccionada",
           statusCode: HttpStatus.CONFLICT,
           extra: {
-            code: "INVALID_RESERVATION_DATE",
+            code: "DATE_ALREADY_RESERVED",
             reservationId: reservation.id,
             customerId: reservation.customerId,
             statusId: reservation.statusId,

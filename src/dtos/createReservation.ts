@@ -8,7 +8,9 @@ import {
   Min,
   Matches,
   MinLength,
+  ValidateIf,
 } from "class-validator";
+import constants from "@app/constants";
 
 export class CreateReservationDto {
   /**
@@ -18,7 +20,7 @@ export class CreateReservationDto {
    */
   @IsDefined()
   @IsInt({ message: "El restaurante no es válido." })
-  @Min(1, { message: "El restaurante no es válido." })
+  @Min(1, { message: "El ID del restaurante debe ser mayor a 0." })
   restaurantId: number;
 
   /**
@@ -28,17 +30,19 @@ export class CreateReservationDto {
    */
   @IsDefined()
   @IsInt({ message: "La mesa no es válida." })
-  @Min(1, { message: "La mesa no es válida." })
+  @Min(1, { message: "El ID de la mesa debe ser mayor a 0." })
   tableId: number;
 
   /**
-   * Restaurant date.
+   * Reservation date.
    * Example: `"2024-06-06"`
    * Required: `true`
    */
   @IsDefined()
   @IsString({ message: "La fecha de reservación no es válida." })
-  @Matches(/\d\d\d\d-\d\d-\d\d/, { message: "La fecha de reservación no es válida (YYYY-MM-DD)." })
+  @Matches(/\d\d\d\d-\d\d-\d\d/, {
+    message: `La fecha de reservación no es válida (${constants.dates.formatReservationDate}).`,
+  })
   reservationDate: string;
 
   /**
@@ -48,7 +52,7 @@ export class CreateReservationDto {
    */
   @IsDefined()
   @IsInt({ message: "El número de invitados no es válido." })
-  @Min(1, { message: "El número de invitados no es válido." })
+  @Min(1, { message: "El número de invitados debe ser mayor a 0." })
   numGuests: number;
 
   /**
@@ -56,10 +60,19 @@ export class CreateReservationDto {
    * Example: `1`
    * Required: `false`
    */
-  @IsOptional()
-  @IsInt()
-  @Min(1, { message: "El cliente no es válido." })
+  @ValidateIf((self) => !self.email)
+  @IsInt({ message: "El cliente no es válido." })
+  @Min(1, { message: "El ID del cliente debe ser mayor a 0." })
   customerId?: number;
+
+  /**
+   * Customer email
+   * Example: `"nico.molina@gmail.com"`
+   * Required: `false`
+   */
+  @ValidateIf((self) => !self.customerId)
+  @IsEmail({}, { message: "El correo electrónico no es válido." })
+  email?: string;
 
   /**
    * Customer name
@@ -69,15 +82,6 @@ export class CreateReservationDto {
   @IsOptional()
   @MinLength(2, { message: "El nombre del cliente no es válido (min. 2 caracteres)." })
   name?: string;
-
-  /**
-   * Customer email
-   * Example: `"nico.molina@gmail.com"`
-   * Required: `false`
-   */
-  @IsOptional()
-  @IsEmail({}, { message: "El correo electrónico no es válido." })
-  email?: string;
 
   /**
    * Customer phone

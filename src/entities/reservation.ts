@@ -1,3 +1,4 @@
+import moment from "moment";
 import {
   Table,
   Column,
@@ -7,8 +8,10 @@ import {
   UpdatedAt,
   ForeignKey,
   BelongsTo,
+  DataType,
 } from "sequelize-typescript";
 import { Model } from "@app/database";
+import constants from "@app/constants";
 import Customer from "./customer";
 import RestaurantTable from "./restaurantTable";
 import ReservationStatus from "./reservationStatus";
@@ -36,7 +39,7 @@ export default class Reservation extends Model<Reservation> {
   @ForeignKey(() => ReservationStatus)
   statusId: number;
 
-  @Column({ field: "reservation_date" })
+  @Column({ field: "reservation_date", type: DataType.DATEONLY })
   reservationDate: Date;
 
   @Column({ field: "num_guests" })
@@ -62,4 +65,13 @@ export default class Reservation extends Model<Reservation> {
 
   @BelongsTo(() => ReservationStatus)
   status?: ReservationStatus;
+
+  //
+  // helpers
+  //
+  isSameReservationDate(reservationDate: string): boolean {
+    return (
+      moment(this.reservationDate).format(constants.dates.formatReservationDate) === reservationDate
+    );
+  }
 }

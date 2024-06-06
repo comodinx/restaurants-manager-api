@@ -1,5 +1,5 @@
 import { Controller, Query, Get, Param, HttpException, HttpStatus } from "@nestjs/common";
-import { FinderDto, GetterByIdDto } from "@app/dtos";
+import { FinderDto, GetterByIdDto, RestaurantAvailabilityDto } from "@app/dtos";
 import { isInteger } from "@app/helpers";
 import { RestaurantsService } from "./service";
 
@@ -21,6 +21,18 @@ export class RestaurantsController {
   @Get()
   async find(@Query() query: FinderDto) {
     return await this.restaurantsService.find(query);
+  }
+
+  /**
+   * Get restaurant availability by ID
+   */
+  @Get(":id/availability")
+  async getAvailabilityById(@Param("id") id: string, @Query() query: RestaurantAvailabilityDto) {
+    if (!id || !isInteger(id)) {
+      throw new HttpException("Invalid ID", HttpStatus.BAD_REQUEST);
+    }
+
+    return await this.restaurantsService.getAvailabilityById(Number(id), query);
   }
 
   /**
