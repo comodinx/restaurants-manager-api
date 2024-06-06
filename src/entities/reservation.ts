@@ -39,9 +39,6 @@ export default class Reservation extends Model<Reservation> {
   @Column({ field: "reservation_date" })
   reservationDate: Date;
 
-  @Column({ field: "reservation_time" })
-  reservationTime: Date;
-
   @Column({ field: "num_guests" })
   numGuests: number;
 

@@ -27,7 +27,7 @@ export class DatabaseOptions implements SequelizeOptionsFactory {
     const defaultName = process.env.DB_NAME || constants.app.name;
     const defaultPass = process.env.DB_PASS || "secret";
     const defaultTimezone = process.env.DB_TIMEZONE || "+00:00";
-    const models = [];
+    const models: string[] = [];
     let pool;
 
     if (isPoolEnabled) {

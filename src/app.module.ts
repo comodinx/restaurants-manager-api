@@ -1,7 +1,7 @@
 import { Module, NestModule, MiddlewareConsumer } from "@nestjs/common";
 import { LoggerMiddleware } from "./server";
 import { DatabaseModule } from "./database";
-import { HealthModule } from "./modules";
+import { HealthModule, RestaurantsModule, ReservationsModule } from "./modules";
 
 @Module({
   exports: [],
@@ -12,6 +12,8 @@ import { HealthModule } from "./modules";
 
     // Controllers
     HealthModule,
+    RestaurantsModule,
+    ReservationsModule,
   ],
   providers: [],
 })

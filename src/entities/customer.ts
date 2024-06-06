@@ -19,6 +19,9 @@ export default class Customer extends Model<Customer> {
   active: number;
 
   @Column
+  description: string;
+
+  @Column
   email?: string;
 
   @Column

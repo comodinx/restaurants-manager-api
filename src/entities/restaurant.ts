@@ -5,8 +5,10 @@ import {
   AutoIncrement,
   CreatedAt,
   UpdatedAt,
+  HasMany,
 } from "sequelize-typescript";
 import { Model } from "@app/database";
+import RestaurantTable from "./restaurantTable";
 
 @Table({ tableName: "restaurants", timestamps: false })
 export default class Restaurant extends Model<Restaurant> {
@@ -37,4 +39,11 @@ export default class Restaurant extends Model<Restaurant> {
   @UpdatedAt
   @Column({ field: "updated_at" })
   updatedAt?: Date;
+
+  //
+  // relationships
+  //
+
+  @HasMany(() => RestaurantTable)
+  tables?: RestaurantTable[];
 }

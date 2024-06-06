@@ -5,13 +5,12 @@ import { HealthService } from "./service";
 // class
 //
 
-// Controller name
 @Controller("/health")
 export class HealthController {
   constructor(private readonly healthService: HealthService) {}
 
   //
-  // public
+  // endpoints
   //
 
   @Get()

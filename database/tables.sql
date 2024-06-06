@@ -26,6 +26,7 @@ DROP TABLE IF EXISTS `customers`;
 CREATE TABLE `customers` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `active` TINYINT UNSIGNED NOT NULL DEFAULT 0,
+  `description` VARCHAR(255) NOT NULL,
   `email` VARCHAR(255) NULL DEFAULT NULL,
   `phone` VARCHAR(255) NULL DEFAULT NULL,
   `password` VARCHAR(255) NULL DEFAULT NULL,
@@ -86,7 +87,6 @@ CREATE TABLE `reservations` (
   `customer_id` INT UNSIGNED NOT NULL,
   `reservation_status_id` INT UNSIGNED NOT NULL,
   `reservation_date` DATE NOT NULL,
-  `reservation_time` TIME NOT NULL,
   `num_guests` INT UNSIGNED NOT NULL,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,

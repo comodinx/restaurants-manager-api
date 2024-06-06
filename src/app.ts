@@ -44,7 +44,7 @@ export class App {
     app.use(cookieParser());
 
     // Pipes
-    app.useGlobalPipes(new ValidationPipe({}));
+    app.useGlobalPipes(new ValidationPipe({ transform: true }));
 
     // CORS
     app.enableCors();

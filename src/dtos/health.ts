@@ -2,27 +2,43 @@
 // class
 //
 export class HealthDto {
-  /** Indicate if micro service is alive. */
+  /**
+   * Indicate if micro service is alive.
+   */
   alive: boolean;
 
-  /** Micro service name. */
+  /**
+   * Micro service name.
+   */
   name: string;
 
-  /** Micro service version. */
+  /**
+   * Micro service version.
+   */
   version: string;
 
-  /** Environment where it is running. */
+  /**
+   * Environment where it is running.
+   */
   environment: string;
 
-  /** Indicate micro service status */
+  /**
+   * Indicate micro service status
+   */
   status?: string;
 
-  /** Includes information" */
+  /**
+   * Includes information
+   */
   info?: any;
 
-  /** Includes more details information */
+  /**
+   * Includes more details information
+   */
   details?: any;
 
-  /** Error information */
+  /**
+   * Error information
+   */
   error?: any;
 }
