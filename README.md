@@ -100,6 +100,14 @@ Para ver ejemplos más concretos, **LOS INVITO A VER LAS PRUEBAS :)**
 npm test
 ```
 
+<p align="right">(<a href="#top">ir arriba</a>)</p>
+
+
+```
+💡 Para la solución de este ejercicio incluimos la carpeta `dist` para evitar compilaciones en la micro VM donde lo deployamos temporalmente para la demo.
+```
+
+
 <!-- deep links -->
 [descargar]: #descargar
 [base_de_datos]: #base-de-datos
