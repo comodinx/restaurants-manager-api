@@ -166,8 +166,8 @@ export class GetAvailabilityByIdStrategy {
    */
   private async resolve(context) {
     const reservations = await this.findReservations(context);
-    const timeline = await this.generateTimeline(context, reservations);
-    const result: any = { timeline };
+    const timelines = await this.generateTimelines(context, reservations);
+    const result: any = { timelines };
 
     if (context.includeRestaurant) {
       result.restaurant = context.restaurant;
@@ -214,7 +214,7 @@ export class GetAvailabilityByIdStrategy {
    *
    * @returns {Promise<object>} List of restaurant tables availables in the requested date range, grouped by date
    */
-  private async generateTimeline(context, reservations: Reservation[]) {
+  private async generateTimelines(context, reservations: Reservation[]) {
     const timeline: any = {
       [context.startDate]: [],
     };

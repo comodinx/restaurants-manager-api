@@ -59,9 +59,9 @@ describe("restaurants", () => {
           const res = JSON.parse(result.payload);
 
           expect(typeof res === "object").toBeTruthy();
-          expect(res.timeline).toBeDefined();
-          expect(res.timeline[startDate]).toBeDefined();
-          expect(res.timeline[startDate].length).toEqual(restaurantTables.length);
+          expect(res.timelines).toBeDefined();
+          expect(res.timelines[startDate]).toBeDefined();
+          expect(res.timelines[startDate].length).toEqual(restaurantTables.length);
         });
     });
 
@@ -86,12 +86,12 @@ describe("restaurants", () => {
 
           expect(typeof res === "object").toBeTruthy();
 
-          expect(res.timeline).toBeDefined();
-          expect(res.timeline[startDate]).toBeDefined();
-          expect(res.timeline[startDate].length).toEqual(restaurantTables.length);
-          expect(res.timeline[endDate]).toBeDefined();
-          expect(res.timeline[endDate].length).toEqual(restaurantTables.length);
-          expect(Object.keys(res.timeline).length).toEqual(5);
+          expect(res.timelines).toBeDefined();
+          expect(res.timelines[startDate]).toBeDefined();
+          expect(res.timelines[startDate].length).toEqual(restaurantTables.length);
+          expect(res.timelines[endDate]).toBeDefined();
+          expect(res.timelines[endDate].length).toEqual(restaurantTables.length);
+          expect(Object.keys(res.timelines).length).toEqual(5);
         });
     });
 
@@ -151,9 +151,9 @@ describe("restaurants", () => {
           const res = JSON.parse(result.payload);
 
           expect(typeof res === "object").toBeTruthy();
-          expect(res.timeline).toBeDefined();
-          expect(res.timeline[reservationDate]).toBeDefined();
-          expect(res.timeline[reservationDate].length).toEqual(restaurantTables.length - 1);
+          expect(res.timelines).toBeDefined();
+          expect(res.timelines[reservationDate]).toBeDefined();
+          expect(res.timelines[reservationDate].length).toEqual(restaurantTables.length - 1);
         });
     });
 
@@ -181,12 +181,12 @@ describe("restaurants", () => {
 
           expect(typeof res === "object").toBeTruthy();
 
-          expect(res.timeline).toBeDefined();
-          expect(res.timeline[startDate]).toBeDefined();
-          expect(res.timeline[startDate].length).toEqual(restaurantTables.length - 1);
-          expect(res.timeline[endDate]).toBeDefined();
-          expect(res.timeline[endDate].length).toEqual(restaurantTables.length);
-          expect(Object.keys(res.timeline).length).toEqual(5);
+          expect(res.timelines).toBeDefined();
+          expect(res.timelines[startDate]).toBeDefined();
+          expect(res.timelines[startDate].length).toEqual(restaurantTables.length - 1);
+          expect(res.timelines[endDate]).toBeDefined();
+          expect(res.timelines[endDate].length).toEqual(restaurantTables.length);
+          expect(Object.keys(res.timelines).length).toEqual(5);
         });
     });
   });

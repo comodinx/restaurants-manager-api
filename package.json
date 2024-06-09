@@ -1,7 +1,7 @@
 {
   "name": "restaurants-manager-api",
   "version": "1.0.0",
-  "description": "API for restaurants management, based on NodeJs + NestJs",
+  "description": "This API is responsible for handling everything necessary for table reservations in the different restaurants managed by the system.",
   "main": "dist/main.js",
   "author": "Nicolas Molina",
   "license": "ISC",
