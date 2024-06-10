@@ -18,7 +18,7 @@ export class CreateReservationDto {
    * Example: `1`
    * Required: `true`
    */
-  @IsDefined()
+  @IsDefined({ message: "El restaurante es requerido." })
   @IsInt({ message: "El restaurante no es válido." })
   @Min(1, { message: "El ID del restaurante debe ser mayor a 0." })
   restaurantId: number;
@@ -28,7 +28,7 @@ export class CreateReservationDto {
    * Example: `1`
    * Required: `true`
    */
-  @IsDefined()
+  @IsDefined({ message: "La mesa es requerida." })
   @IsInt({ message: "La mesa no es válida." })
   @Min(1, { message: "El ID de la mesa debe ser mayor a 0." })
   tableId: number;
@@ -38,7 +38,7 @@ export class CreateReservationDto {
    * Example: `"2024-06-06"`
    * Required: `true`
    */
-  @IsDefined()
+  @IsDefined({ message: "La fecha de reservación es requerida." })
   @IsString({ message: "La fecha de reservación no es válida." })
   @Matches(/\d\d\d\d-\d\d-\d\d/, {
     message: `La fecha de reservación no es válida (${constants.dates.formatReservationDate}).`,
@@ -50,7 +50,7 @@ export class CreateReservationDto {
    * Example: `1`
    * Required: `true`
    */
-  @IsDefined()
+  @IsDefined({ message: "El ro de invitados es requerido." })
   @IsInt({ message: "El número de invitados no es válido." })
   @Min(1, { message: "El número de invitados debe ser mayor a 0." })
   numGuests: number;

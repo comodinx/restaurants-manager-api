@@ -10,7 +10,7 @@ Esta API se encarga de manejar todo lo necesario para las reservas de las mesas 
 * [Configuraciones][configuraciones]
 * [Base de datos][base_de_datos]
 * [¿Cómo se corre?][como_se_corre]
-* [Endpoints][endpoints]
+* [Documentación de la API][documentacion_de_la_api]
 * [Tests][tests]
 
 
@@ -86,8 +86,8 @@ npm run build && npm start
 <p align="right">(<a href="#top">ir arriba</a>)</p>
 
 
-## Endpoints
-* `GET` [/health](#get-health) Health check.
+## Documentación de la API
+Van a poder encontrar la documentación de la API en este [link](https://github.com/comodinx/restaurants-manager-api/blob/main/doc/README.md)
 
 <p align="right">(<a href="#top">ir arriba</a>)</p>
 
@@ -114,5 +114,5 @@ npm test
 [configuraciones]: #configuraciones
 [base_de_datos]: #base-de-datos
 [como_se_corre]: #como-se-corre
-[endpoints]: #endpoints
+[documentacion_de_la_api]: #documentacion-de-la-api
 [tests]: #tests

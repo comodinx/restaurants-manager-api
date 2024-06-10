@@ -18,19 +18,19 @@ const constants_1 = __importDefault(require("../constants"));
 class CreateReservationDto {
 }
 __decorate([
-    (0, class_validator_1.IsDefined)(),
+    (0, class_validator_1.IsDefined)({ message: "El restaurante es requerido." }),
     (0, class_validator_1.IsInt)({ message: "El restaurante no es válido." }),
     (0, class_validator_1.Min)(1, { message: "El ID del restaurante debe ser mayor a 0." }),
     __metadata("design:type", Number)
 ], CreateReservationDto.prototype, "restaurantId", void 0);
 __decorate([
-    (0, class_validator_1.IsDefined)(),
+    (0, class_validator_1.IsDefined)({ message: "La mesa es requerida." }),
     (0, class_validator_1.IsInt)({ message: "La mesa no es válida." }),
     (0, class_validator_1.Min)(1, { message: "El ID de la mesa debe ser mayor a 0." }),
     __metadata("design:type", Number)
 ], CreateReservationDto.prototype, "tableId", void 0);
 __decorate([
-    (0, class_validator_1.IsDefined)(),
+    (0, class_validator_1.IsDefined)({ message: "La fecha de reservación es requerida." }),
     (0, class_validator_1.IsString)({ message: "La fecha de reservación no es válida." }),
     (0, class_validator_1.Matches)(/\d\d\d\d-\d\d-\d\d/, {
         message: `La fecha de reservación no es válida (${constants_1.default.dates.formatReservationDate}).`,
@@ -38,7 +38,7 @@ __decorate([
     __metadata("design:type", String)
 ], CreateReservationDto.prototype, "reservationDate", void 0);
 __decorate([
-    (0, class_validator_1.IsDefined)(),
+    (0, class_validator_1.IsDefined)({ message: "El ro de invitados es requerido." }),
     (0, class_validator_1.IsInt)({ message: "El número de invitados no es válido." }),
     (0, class_validator_1.Min)(1, { message: "El número de invitados debe ser mayor a 0." }),
     __metadata("design:type", Number)

@@ -18,7 +18,7 @@ const constants_1 = __importDefault(require("../constants"));
 class RestaurantAvailabilityDto {
 }
 __decorate([
-    (0, class_validator_1.IsDefined)(),
+    (0, class_validator_1.IsDefined)({ message: "La fecha de inicio es requerida." }),
     (0, class_validator_1.IsString)({ message: "La fecha de inicio no es válida." }),
     (0, class_validator_1.Matches)(/\d\d\d\d-\d\d-\d\d/, {
         message: `La fecha de inicio no es válida (${constants_1.default.dates.formatReservationDate}).`,

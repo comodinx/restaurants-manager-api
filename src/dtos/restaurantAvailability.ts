@@ -7,7 +7,7 @@ export class RestaurantAvailabilityDto {
    * Example: `"2024-06-06"`
    * Required: `true`
    */
-  @IsDefined()
+  @IsDefined({ message: "La fecha de inicio es requerida." })
   @IsString({ message: "La fecha de inicio no es válida." })
   @Matches(/\d\d\d\d-\d\d-\d\d/, {
     message: `La fecha de inicio no es válida (${constants.dates.formatReservationDate}).`,
