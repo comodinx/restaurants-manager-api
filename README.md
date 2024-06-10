@@ -7,6 +7,7 @@ Esta API se encarga de manejar todo lo necesario para las reservas de las mesas 
 ## Index
 
 * [Descargar][descargar]
+* [Configuraciones][configuraciones]
 * [Base de datos][base_de_datos]
 * [¿Cómo se corre?][como_se_corre]
 * [Endpoints][endpoints]
@@ -110,6 +111,7 @@ npm test
 
 <!-- deep links -->
 [descargar]: #descargar
+[configuraciones]: #configuraciones
 [base_de_datos]: #base-de-datos
 [como_se_corre]: #como-se-corre
 [endpoints]: #endpoints
