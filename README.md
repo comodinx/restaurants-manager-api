@@ -113,6 +113,6 @@ npm test
 [descargar]: #descargar
 [configuraciones]: #configuraciones
 [base_de_datos]: #base-de-datos
-[como_se_corre]: #como-se-corre
+[como_se_corre]: #cómo-se-corre
 [documentacion_de_la_api]: #documentación-de-la-api
 [tests]: #tests
