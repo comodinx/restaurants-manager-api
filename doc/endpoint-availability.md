@@ -1,4 +1,4 @@
-# GET /milestones
+# GET /restaurants/{id}/availability
 
 ## Introducción
 

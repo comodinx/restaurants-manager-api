@@ -36,7 +36,7 @@ Esta sección fue diseñada para facilitar la interpretación de los query param
 |:---------|:-------|:------------------|:--------------------------------------------------------------|
 | group    | string | `null`            | Agrupamiento a aplicar en el resultado de la búsqueda.        |
 |          |        |                   | Ejemplo,                                                      |
-|          |        |                   | `platform`                                                    |
+|          |        |                   | `customerId`                                                  |
 
 <hr/>
 <p align="right">(<a href="#top">ir arriba</a>)</p>
@@ -49,7 +49,7 @@ Esta sección fue diseñada para facilitar la interpretación de los query param
 | filters  | string | `null`            | Filtros a aplicar en la búsqueda.                             |
 |          |        |                   | Todos los campos de la tabla son aplicables para el filtrado. |
 |          |        |                   | Ejemplo,                                                      |
-|          |        |                   | `statusId eq 1`                                               |
+|          |        |                   | `active eq 1`                                                 |
 
 > 💡 Para ver mas detalle del funcionamiento de los filtros y su sintaxis, [acceder a este link](https://www.npmjs.com/package/@comodinx/query-filters)
 
@@ -63,7 +63,7 @@ Esta sección fue diseñada para facilitar la interpretación de los query param
 |:---------|:-------|:------------------|:--------------------------------------------------------------|
 | include  | string | `null`            | Relaciones a incluir en el resultado de la búsqueda.          |
 |          |        |                   | Ejemplo,                                                      |
-|          |        |                   | `status,r-products`                                           |
+|          |        |                   | `status`                                           |
 
 <hr/>
 <p align="right">(<a href="#top">ir arriba</a>)</p>
@@ -78,28 +78,4 @@ Esta sección fue diseñada para facilitar la interpretación de los query param
 |          |        |                   | `id,statusId`                                                 |
 
 <hr/>
-<p align="right">(<a href="#top">ir arriba</a>)</p>
-
-
-### Extras
-
-| Nombre   | Tipo   | Valor por defecto | Descripción                                                   |
-|:---------|:-------|:------------------|:--------------------------------------------------------------|
-| extras   | string | `null`            | Campos a extras a incluir en el resultado de la búsqueda.     |
-|          |        |                   | Ejemplo,                                                      |
-|          |        |                   | `category,brand`                                              |
-
-<hr/>
-<p align="right">(<a href="#top">ir arriba</a>)</p>
-
-
-## Tests
-
-Para ver ejemplos más concretos, **LOS INVITO A VER LAS PRUEBAS :)**
-
-### Ejecutar las pruebas unitarias
-```sh
-npm test -- query
-```
-
 <p align="right">(<a href="#top">ir arriba</a>)</p>
