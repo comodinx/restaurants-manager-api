@@ -188,7 +188,12 @@ export class CreateReservationStrategy {
           statusCode: HttpStatus.CONFLICT,
           extra: {
             code: "RESERVATION_ALREADY_EXISTS",
-            customer: context.customer,
+            customer: {
+              id: context.customer?.id,
+              name: context.customer?.description,
+              email: context.customer?.email,
+              phone: context.customer?.phone,
+            },
             reservation,
           },
         },
