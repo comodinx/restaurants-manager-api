@@ -114,5 +114,5 @@ npm test
 [configuraciones]: #configuraciones
 [base_de_datos]: #base-de-datos
 [como_se_corre]: #como-se-corre
-[documentacion_de_la_api]: #documentacion-de-la-api
+[documentacion_de_la_api]: #documentación-de-la-api
 [tests]: #tests
